@@ -17,11 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SearchApi", "SearchApi", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RegisterApi", "RegisterApi", "{322F233B-A6D0-44E9-9E5B-42CB6150F288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OigaDpr.RegisterApi", "OigaDpr.RegisterApi\OigaDpr.RegisterApi.csproj", "{41238341-B397-4A4B-966B-BAD6BB1FC3A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OigaDpr.RegisterApi", "OigaDpr.RegisterApi\OigaDpr.RegisterApi.csproj", "{41238341-B397-4A4B-966B-BAD6BB1FC3A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OigaDpr.Web", "OigaDpr.Web\OigaDpr.Web.csproj", "{53BD9C82-C538-4D67-9875-0F6DE62F4D9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OigaDpr.Web", "OigaDpr.Web\OigaDpr.Web.csproj", "{53BD9C82-C538-4D67-9875-0F6DE62F4D9A}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CA405FD4-B24F-4E77-8E8F-76F3760E43B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OigaDpr.Common.Dtos", "..\OigaDpr.Common.Dtos\OigaDpr.Common.Dtos.csproj", "{33EF66B4-FBA3-430F-B666-E5727D8E283F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OigaDpr.Data", "..\OigaDpr.Data\OigaDpr.Data.csproj", "{C83B1C32-6955-4298-9DA6-87E8391EBBE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,14 @@ Global
 		{CA405FD4-B24F-4E77-8E8F-76F3760E43B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA405FD4-B24F-4E77-8E8F-76F3760E43B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA405FD4-B24F-4E77-8E8F-76F3760E43B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33EF66B4-FBA3-430F-B666-E5727D8E283F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33EF66B4-FBA3-430F-B666-E5727D8E283F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33EF66B4-FBA3-430F-B666-E5727D8E283F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33EF66B4-FBA3-430F-B666-E5727D8E283F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C83B1C32-6955-4298-9DA6-87E8391EBBE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C83B1C32-6955-4298-9DA6-87E8391EBBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C83B1C32-6955-4298-9DA6-87E8391EBBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C83B1C32-6955-4298-9DA6-87E8391EBBE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +62,8 @@ Global
 		{322F233B-A6D0-44E9-9E5B-42CB6150F288} = {5E03EAF0-1BC2-4966-88FC-3DFFB611F197}
 		{41238341-B397-4A4B-966B-BAD6BB1FC3A7} = {322F233B-A6D0-44E9-9E5B-42CB6150F288}
 		{53BD9C82-C538-4D67-9875-0F6DE62F4D9A} = {94D608A4-2784-465C-96D0-29B2D085006C}
+		{33EF66B4-FBA3-430F-B666-E5727D8E283F} = {0CC0866C-5323-484E-BC57-9AA4F278B334}
+		{C83B1C32-6955-4298-9DA6-87E8391EBBE4} = {9031C4F0-590C-4745-AFF0-D71D1A57D605}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0308C88-2383-455D-B533-9C61BE2F83D2}

@@ -9,12 +9,12 @@ services:
     ports:
      - "51000:50001"
 
-  oigadpr.web-dapr:
-    image: "daprio/daprd:latest"
-    command: [ "./daprd", "-app-id", "oigaweb", "-app-port", "80" ]
-    depends_on:
-     - oigadpr.web
-    network_mode: "service:oigadpr.web"
+  #oigadpr.web-dapr:
+  #  image: "daprio/daprd:latest"
+  #  command: [ "./daprd", "-app-id", "oigaweb", "-app-port", "80" ]
+  #  depends_on:
+  #   - oigadpr.web
+  #  network_mode: "service:oigadpr.web"
 
   oigadpr.registerapi:
     image: ${DOCKER_REGISTRY-}oigadprregisterapi
@@ -24,9 +24,9 @@ services:
     ports:
      - "52000:50001"
 
-  oigadpr.registerapi-dapr:
-    image: "daprio/daprd:latest"
-    command: [ "./daprd", "-app-id", "registerapi", "-app-port", "80" ]
-    depends_on:
-     - oigadpr.registerapi
-    network_mode: "service:oigadpr.registerapi"
+  #oigadpr.registerapi-dapr:
+  #  image: "daprio/daprd:latest"
+  #  command: [ "./daprd", "-app-id", "registerapi", "-app-port", "80" ]
+  #  depends_on:
+  #   - oigadpr.registerapi
+  #  network_mode: "service:oigadpr.registerapi"
