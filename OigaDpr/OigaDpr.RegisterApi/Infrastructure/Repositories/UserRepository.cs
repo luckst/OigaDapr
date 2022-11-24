@@ -24,12 +24,12 @@ namespace OigaDpr.RegisterApi.Infrastructure.Repositories
 
             if (keyState.Value == null)
             {
-                var key = new Key();
-                key.KeyValues.Add(user.Username);
-                keyState.Value = key;
+                keyState.Value = new Key();
             }
 
-            keyState.Value.KeyValues.Add(user.Username);
+            if (!keyState.Value.KeyValues.Contains(user.Username, StringComparer.InvariantCultureIgnoreCase))
+                keyState.Value.KeyValues.Add(user.Username);
+
             await keyState.SaveAsync();
         }
 
@@ -38,22 +38,6 @@ namespace OigaDpr.RegisterApi.Infrastructure.Repositories
             var state = await _daprClient.GetStateEntryAsync<User>(OigaStateStore, username);
 
             return state.Value;
-        }
-
-        public async Task<IEnumerable<User>> Search(string[] filters)
-        {
-            var key = await _daprClient.GetStateAsync<Key>(KeysStateStore, KeyName);
-
-            if (key == null || !key.KeyValues.Any())
-            {
-                return new List<User>();
-            }
-
-
-
-            var state = await _daprClient.GetBulkStateAsync(OigaStateStore, key.KeyValues, 2);
-
-            return new List<User>();
         }
     }
 }

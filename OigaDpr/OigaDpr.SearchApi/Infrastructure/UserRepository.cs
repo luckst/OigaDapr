@@ -1,4 +1,5 @@
 ﻿using Dapr.Client;
+using Newtonsoft.Json;
 using OigaDpr.SearchApi.Models;
 
 namespace OigaDpr.SearchApi.Infrastructure
@@ -15,14 +16,14 @@ namespace OigaDpr.SearchApi.Infrastructure
             _daprClient = daprClient;
         }
 
-        public async Task<User> Get(string username)
+        public async Task<User?> Get(string username)
         {
             var state = await _daprClient.GetStateEntryAsync<User>(OigaStateStore, username);
 
-            return state.Value;
+            return state.Value ?? new User();
         }
 
-        public async Task<IEnumerable<User>> Search(string[] filters)
+        public async Task<IEnumerable<User>> GetAll()
         {
             var key = await _daprClient.GetStateAsync<Key>(KeysStateStore, KeyName);
 
@@ -31,11 +32,11 @@ namespace OigaDpr.SearchApi.Infrastructure
                 return new List<User>();
             }
 
+            var stateItems = await _daprClient.GetBulkStateAsync(OigaStateStore, key.KeyValues.Distinct().ToList(), 2);
 
+            var users = stateItems.Select(i => JsonConvert.DeserializeObject<User>(i.Value)).ToList();
 
-            var state = await _daprClient.GetBulkStateAsync(OigaStateStore, key.KeyValues, 2);
-
-            return new List<User>();
+            return users!;
         }
     }
 }

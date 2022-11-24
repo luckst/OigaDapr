@@ -4,7 +4,7 @@ namespace OigaDpr.SearchApi.Infrastructure
 {
     public interface IUserRepository
     {
-        Task<User> Get(string username);
-        Task<IEnumerable<User>> Search(string[] filters);
+        Task<User?> Get(string username);
+        Task<IEnumerable<User>> GetAll();
     }
 }

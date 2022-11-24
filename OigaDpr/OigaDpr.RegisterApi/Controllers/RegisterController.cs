@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OigaDpr.RegisterApi.Infrastructure.NamedExceptions;
 using OigaDpr.RegisterApi.Models;
 using OigaDpr.RegisterApi.Services;
 
@@ -19,17 +20,23 @@ namespace OigaDpr.RegisterApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(User user)
         {
-            if (user == null ||
-                string.IsNullOrEmpty(user.Username) ||
-                string.IsNullOrEmpty(user.FirstName) ||
-                string.IsNullOrEmpty(user.LastName))
-                return BadRequest();
+            try
+            {
+                if (string.IsNullOrEmpty(user.Username) ||
+                    string.IsNullOrEmpty(user.FirstName) ||
+                    string.IsNullOrEmpty(user.LastName))
+                    return BadRequest();
 
-            var result = await _registerService.AddUser(user);
+                var result = await _registerService.AddUser(user);
 
-            if (result < 0) return Problem("Error Adding the user");
+                if (result < 0) return BadRequest("Error Adding the user");
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (UsernameTakenException)
+            {
+                return StatusCode(409, "Username already taken");
+            }
         }
     }
 }

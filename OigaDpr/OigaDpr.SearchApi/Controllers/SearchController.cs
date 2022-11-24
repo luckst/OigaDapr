@@ -17,9 +17,15 @@ namespace OigaDpr.SearchApi.Controllers
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<User>> Search([FromQuery] string? filters)
+        public async Task<IEnumerable<User>> Search([FromQuery] string? filters, [FromQuery] int pageSize = 10, [FromQuery] int pageNumber = 0)
         {
-            return await _searchService.Search(filters ?? "");
+            return await _searchService.Search(filters ?? "", pageSize, pageNumber);
+        }
+
+        [HttpGet("{username}")]
+        public async Task<User?> Get(string username)
+        {
+            return await _searchService.Get(username);
         }
     }
 }

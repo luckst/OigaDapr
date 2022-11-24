@@ -12,6 +12,8 @@ spec:
     value: ""
   - name: actorStateStore
     value: "true"
+  - name: keyPrefix
+    value: oiga
 scopes:
   - registerapi
   - searchapi
