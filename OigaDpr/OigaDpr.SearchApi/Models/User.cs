@@ -1,4 +1,4 @@
-﻿namespace OigaDpr.Common.Dtos.User
+﻿namespace OigaDpr.SearchApi.Models
 {
     public class User
     {

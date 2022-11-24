@@ -1,5 +1,6 @@
 ﻿using Dapr.Client;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OigaDpr.Web.Models;
 
 namespace OigaDpr.Web.Pages
 {
@@ -14,20 +15,14 @@ namespace OigaDpr.Web.Pages
 
         public async Task OnGet()
         {
-            try
-            {
-                var forecasts = await _daprClient.InvokeMethodAsync<IEnumerable<WeatherForecast>>(
-                    HttpMethod.Get,
-                    "registerapi",
-                    "WeatherForecast");
+            string filters = "";
 
-                ViewData["WeatherForecastData"] = forecasts;
-            }
-            catch (Exception ex)
-            {
+            var users = await _daprClient.InvokeMethodAsync<IEnumerable<User>>(
+                HttpMethod.Get,
+                "searchapi",
+                $"api/search?filters={filters}");
 
-                throw;
-            }
+            ViewData["WeatherForecastData"] = users;
         }
     }
 }

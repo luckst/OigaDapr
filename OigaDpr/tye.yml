@@ -28,6 +28,8 @@ services:
   project: OigaDpr.RegisterApi/OigaDpr.RegisterApi.csproj
 - name: oigaweb
   project: OigaDpr.Web/OigaDpr.Web.csproj
+- name: searchapi
+  project: OigaDpr.SearchApi/OigaDpr.SearchApi.csproj
 
 # This may conflict with the redis instance that dapr manages.
 #
