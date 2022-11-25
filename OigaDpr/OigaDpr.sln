@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OigaDpr.RegisterApi", "Oiga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OigaDpr.Web", "OigaDpr.Web\OigaDpr.Web.csproj", "{53BD9C82-C538-4D67-9875-0F6DE62F4D9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OigaDpr.SearchApi", "OigaDpr.SearchApi\OigaDpr.SearchApi.csproj", "{2DEB1BF2-4829-473D-80BF-B7B41CD80611}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OigaDpr.SearchApi", "OigaDpr.SearchApi\OigaDpr.SearchApi.csproj", "{2DEB1BF2-4829-473D-80BF-B7B41CD80611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
