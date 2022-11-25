@@ -3,12 +3,72 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<h2>Users</h2>
+<p>
+    <a asp-page="RegisterUser">Create New</a>
+</p>
+@if (!Model.List.Users.Any())
+{
+    <div class="alert alert-info" role="alert">
+        No results found
+    </div>
+}
+else
+{
+    <form asp-page="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by username/name:
+                <input type="text" name="SearchString" id="txtFilter" value="@Model.Filter" />
+                <input type="submit" value="Search" class="btn btn-primary" /> |
+                <a asp-page="Index">Clear</a>
+            </p>
+        </div>
+    </form>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    @*@foreach (var forecast in (IEnumerable<WeatherForecast>)ViewData["WeatherForecastData"]!)
-    {
-        <p>The forecast for @forecast.Date is @forecast.Summary!</p>
-    }*@
-</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.List.Users[0].Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.List.Users[0].FullName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.List.Users)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @*<a asp-page="Details" asp-route-id="@item.Username">Details</a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    var prevDisabled = !Model.List.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.List.HasNextPage ? "disabled" : "";
+
+    <a asp-page="Index"
+   asp-route-pageIndex="@(Model.List.PageIndex - 1)"
+   asp-route-filter="@Model.Filter"
+   class="btn btn-primary @prevDisabled">
+        Previous
+    </a>
+    <a asp-page="Index"
+   asp-route-pageIndex="@(Model.List.PageIndex + 1)"
+   asp-route-filter="@Model.Filter"
+   class="btn btn-primary @nextDisabled">
+        Next
+    </a>
+}

@@ -17,7 +17,7 @@ namespace OigaDpr.SearchApi.Controllers
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<User>> Search([FromQuery] string? filters, [FromQuery] int pageSize = 10, [FromQuery] int pageNumber = 0)
+        public async Task<PaginatedUserList> Search([FromQuery] string? filters, [FromQuery] int pageSize = 10, [FromQuery] int pageNumber = 0)
         {
             return await _searchService.Search(filters ?? "", pageSize, pageNumber);
         }

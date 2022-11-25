@@ -1,5 +1,6 @@
 ﻿using OigaDpr.SearchApi.Infrastructure;
 using OigaDpr.SearchApi.Models;
+using static Google.Rpc.Context.AttributeContext.Types;
 
 namespace OigaDpr.SearchApi.Services
 {
@@ -27,7 +28,7 @@ namespace OigaDpr.SearchApi.Services
             }
         }
 
-        public async Task<IEnumerable<User>> Search(string filters, int pageSize, int pageIndex)
+        public async Task<PaginatedUserList> Search(string filters, int pageSize, int pageIndex)
         {
             try
             {
@@ -37,31 +38,46 @@ namespace OigaDpr.SearchApi.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error adding user");
-                return new List<User>();
+                return new PaginatedUserList();
             }
         }
 
-        private async Task<List<User>> PageResults(List<User> users, string[] filters, int pageSize, int pageIndex)
+        private async Task<PaginatedUserList> PageResults(List<User> users, string[] filters, int pageSize, int pageIndex)
         {
             var filteredList = new List<User>();
             if (filters.Any() && users.Any())
+                filteredList = await FilterResults(users, filters);
+            else
+                filteredList.AddRange(users);
+
+            var result = new PaginatedUserList()
             {
-                var tasks = filters.Select(f => Filter(users, f)).ToList();
+                TotalPages = (int)Math.Ceiling(filteredList.Count / (double)pageSize),
+                PageIndex = pageIndex,
+                Users = filteredList.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList()
 
-                await Task.WhenAll(tasks);
+            };
 
-                tasks.ForEach(t =>
+            return result;
+        }
+
+        private async Task<List<User>> FilterResults(List<User> users, string[] filters)
+        {
+            var filteredList = new List<User>();
+
+            var tasks = filters.Select(f => Filter(users, f)).ToList();
+
+            await Task.WhenAll(tasks);
+
+            tasks.ForEach(t =>
+            {
+                if (t.Result.Any())
                 {
-                    if (t.Result.Any())
-                    {
-                        filteredList.AddRange(t.Result);
-                    }
-                });
-            }
+                    filteredList.AddRange(t.Result);
+                }
+            });
 
-            filteredList = filteredList.Skip(pageIndex).Take(pageSize).ToList();
-
-            return filteredList;
+            return filteredList.DistinctBy(u => u.Username).ToList();
         }
 
         private Task<List<User>> Filter(List<User> users, string data)
